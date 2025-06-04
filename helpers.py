@@ -81,14 +81,14 @@ class Generators:
     @staticmethod
     def generate_random_email():
         login_name = ''.join(random.choices(string.ascii_lowercase + string.digits, k=random.randint(3, 10)))
-        email_name = ''.join(random.choices(string.ascii_lowercase, k=random.randint(2, 10)))
+        email_name = ''.join(random.choices(string.ascii_lowercase, k=random.randint(3, 10)))
         email_domain = ''.join(random.choices(string.ascii_lowercase, k=2))
         return f"{login_name}@{email_name}.{email_domain}"
 
     @staticmethod
     def generate_random_name():
         allowed_chars = string.ascii_lowercase + string.digits
-        random_name = ''.join(random.choices(allowed_chars, k=random.randint(2, 10)))
+        random_name = ''.join(random.choices(allowed_chars, k=random.randint(3, 10)))
         return random_name
 
     @staticmethod
@@ -96,3 +96,9 @@ class Generators:
         allowed_chars = string.digits
         random_password = ''.join(random.choices(allowed_chars, k=4))
         return random_password
+
+    @staticmethod
+    def change_last_two_chars(input_string):
+        allowed_chars = string.ascii_lowercase
+        modified_string = input_string[:-2] + ''.join(random.choices(allowed_chars, k=2))
+        return modified_string

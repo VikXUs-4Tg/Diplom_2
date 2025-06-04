@@ -1,7 +1,7 @@
 import pytest
 
 from data import const
-from helpers import Generators, RequestTools
+from helpers import RequestTools, Generators
 
 
 @pytest.fixture(scope='function')

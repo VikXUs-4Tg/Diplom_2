@@ -1,7 +1,7 @@
 import allure
 import pytest
 
-from data import WEBPAGE, const, results, user_registration_need_parameters
+from data import WEBPAGE, results, user_registration_need_parameters
 from helpers import RequestTools
 
 
