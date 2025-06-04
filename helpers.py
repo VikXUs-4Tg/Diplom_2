@@ -2,11 +2,15 @@ import requests
 import random
 import string
 import allure
+import copy
 
 from data import const
 
 
 russian_letters = ''.join([chr(i) for i in range(1040, 1104)])
+
+def make_clone(test_data):
+    return copy.deepcopy(test_data)
 
 class RequestTools:
 
@@ -30,13 +34,19 @@ class RequestTools:
         return response
 
     @staticmethod
-    @allure.step("Пытаемся авторизироваться под пользователем")
+    @allure.step("Пытаемся авторизоваться под пользователем")
     def try_user_authorization(user):
         response = RequestTools.send_request(handler=const['HANDLER_AUTHORIZATION_USER'], data=user)
         allure.attach(  body=f"Код ответа: {response.status_code}\nТело ответа:\n{response.text}".encode(),
-                        name="Ответ на попытку авторизироваться под пользователем",
+                        name="Ответ на попытку авторизоваться под пользователем",
                         attachment_type=allure.attachment_type.TEXT, extension=".txt")
         return response
+
+    @staticmethod
+    @allure.step("Пытаемся получить токен авторизации пользователя")
+    def try_to_get_user_authorization_token(user):
+        token = RequestTools.try_user_authorization(user=user).json()[const['USER_ACCESS_TOKEN_PARAMETER_NAME']]
+        return {const['USER_AUTHORIZATION_PARAMETER_NAME']: token}
 
     @staticmethod
     @allure.step("Пытаемся удалить пользователя")
@@ -44,6 +54,15 @@ class RequestTools:
         response = RequestTools.send_request(handler=const['HANDLER_DELETE_USER'], headers=user_access_token)
         allure.attach(  body=f"Код ответа: {response.status_code}\nТело ответа:\n{response.text}".encode(),
                         name="Ответ на попытку удалить пользователя",
+                        attachment_type=allure.attachment_type.TEXT, extension=".txt")
+        return response
+
+    @staticmethod
+    @allure.step("Пытаемся изменить данные пользователя")
+    def try_to_change_data_of_user(user_access_token, new_data):
+        response = RequestTools.send_request(handler=const['HANDLER_CHANGE_DATA_OF_USER'], headers=user_access_token, data=new_data)
+        allure.attach(  body=f"Код ответа: {response.status_code}\nТело ответа:\n{response.text}".encode(),
+                        name="Ответ на попытку изменить данные пользователя",
                         attachment_type=allure.attachment_type.TEXT, extension=".txt")
         return response
 
@@ -67,9 +86,9 @@ class RequestTools:
         response = RequestTools.try_user_authorization(user)
         if response.status_code == 200:
             token = response.json()[const['USER_ACCESS_TOKEN_PARAMETER_NAME']]
-            RequestTools.try_to_delete_user({const['USER_AUTHORIZATION_PARAMETER_NAME']: token})
+            RequestTools.try_to_delete_user(user_access_token={const['USER_AUTHORIZATION_PARAMETER_NAME']: token})
             allure.attach(  body=f"Удален пользователь с именем {user[const['USER_NAME_PARAMETER_NAME']]} (email: {user[const['USER_EMAIL_PARAMETER_NAME']]})".encode(),
-                            name="Успешное удаление созданного курьера",
+                            name="Успешное удаление созданного пользователя",
                             attachment_type=allure.attachment_type.TEXT, extension=".txt")
         else:
             allure.attach(  body=f"Авторизоваться под пользователем не удалось".encode(),

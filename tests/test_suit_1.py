@@ -22,27 +22,27 @@ class TestSuit1:
     def test_not_allowed_registration_two_identical_user(self, random_user):
         RequestTools.try_to_register_new_user(user=random_user)
         response = RequestTools.try_to_register_new_user(user=random_user)
-        RequestTools.check_response_have_content(actually_value=response,results=results['NOT_ALLOWED_REGISTRATION_TWO_IDENTICAL_USER'])
+        RequestTools.check_response(actually_value=response,results=results['NOT_ALLOWED_REGISTRATION_TWO_IDENTICAL_USER'])
 
     @pytest.mark.parametrize('parameter', user_registration_need_parameters)
-    @allure.title('№ 1-3 Проверка невозможность произвести регистрацию нового пользователя без указания обязательного параметра {parameter}')
-    @allure.description('Отправляем запрос на ручку (POST api/auth/register) регистрации пользователя без указания обязательного параметра {parameter}, проверяем код и тело ответа')
+    @allure.title('№ 1-3 Проверка невозможность произвести регистрацию нового пользователя без указания обязательного параметра "{parameter}"')
+    @allure.description('Отправляем запрос на ручку (POST api/auth/register) регистрации пользователя без указания обязательного параметра, проверяем код и тело ответа')
     @allure.story("Тестовый сценарий № 1")
     @allure.link(WEBPAGE, name='Учебный сервис «Stellar Burgers» (стенд)')
     def test_not_allowed_registration_with_out_any_need_parameters(self, random_user, parameter):
         del random_user[parameter]
         response = RequestTools.try_to_register_new_user(user=random_user)
-        RequestTools.check_response_have_content(actually_value=response,results=results['NOT_ALLOWED_REGISTRATION_USER_WITH_OUT_OR_EMPTY_ANY_NEED_PARAMETERS'])
+        RequestTools.check_response(actually_value=response,results=results['NOT_ALLOWED_REGISTRATION_USER_WITH_OUT_OR_EMPTY_ANY_NEED_PARAMETERS'])
 
     @pytest.mark.parametrize('parameter', user_registration_need_parameters)
-    @allure.title('№ 1-4 Проверка невозможность произвести регистрацию нового пользователя при указании пустого значения обязательного параметра {parameter}')
-    @allure.description('Отправляем запрос на ручку (POST api/auth/register) регистрации пользователя c пустым значением обязательного параметра {parameter}, проверяем код и тело ответа')
+    @allure.title('№ 1-4 Проверка невозможность произвести регистрацию нового пользователя при указании пустого значения обязательного параметра "{parameter}"')
+    @allure.description('Отправляем запрос на ручку (POST api/auth/register) регистрации пользователя c пустым значением обязательного параметра, проверяем код и тело ответа')
     @allure.story("Тестовый сценарий № 1")
     @allure.link(WEBPAGE, name='Учебный сервис «Stellar Burgers» (стенд)')
     def test_not_allowed_registration_with_empty_any_need_parameters(self, random_user, parameter):
         random_user[parameter] = ""
         response = RequestTools.try_to_register_new_user(user=random_user)
-        RequestTools.check_response_have_content(actually_value=response,results=results['NOT_ALLOWED_REGISTRATION_USER_WITH_OUT_OR_EMPTY_ANY_NEED_PARAMETERS'])
+        RequestTools.check_response(actually_value=response,results=results['NOT_ALLOWED_REGISTRATION_USER_WITH_OUT_OR_EMPTY_ANY_NEED_PARAMETERS'])
 
 
 
