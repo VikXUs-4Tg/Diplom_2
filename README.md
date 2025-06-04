@@ -20,6 +20,14 @@
 
 > `$ pip install -r requirements.txt`
 
+**Сгенерировать отчеты в Allure**
+
+> `$ pytest tests/. --alluredir=allure_results`
+
+**Посмотреть результаты тестирования в Allure**
+
+> `$ allure serve allure_results`
+
 <hr>
 
 ### Ссылки:

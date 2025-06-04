@@ -24,6 +24,27 @@ class RequestTools:
     @allure.step("Пытаемся зарегистрировать пользователя")
     def try_to_register_new_user(user):
         response = RequestTools.send_request(handler=const['HANDLER_REGISTRATION_USER'], data=user)
+        allure.attach(  body=f"Код ответа: {response.status_code}\nТело ответа:\n{response.text}".encode(),
+                        name="Ответ на попытку регистрации пользователя",
+                        attachment_type=allure.attachment_type.TEXT, extension=".txt")
+        return response
+
+    @staticmethod
+    @allure.step("Пытаемся авторизироваться под пользователем")
+    def try_user_authorization(user):
+        response = RequestTools.send_request(handler=const['HANDLER_AUTHORIZATION_USER'], data=user)
+        allure.attach(  body=f"Код ответа: {response.status_code}\nТело ответа:\n{response.text}".encode(),
+                        name="Ответ на попытку авторизироваться под пользователем",
+                        attachment_type=allure.attachment_type.TEXT, extension=".txt")
+        return response
+
+    @staticmethod
+    @allure.step("Пытаемся удалить пользователя")
+    def try_to_delete_user(user_access_token):
+        response = RequestTools.send_request(handler=const['HANDLER_DELETE_USER'], headers=user_access_token)
+        allure.attach(  body=f"Код ответа: {response.status_code}\nТело ответа:\n{response.text}".encode(),
+                        name="Ответ на попытку удалить пользователя",
+                        attachment_type=allure.attachment_type.TEXT, extension=".txt")
         return response
 
     @staticmethod
@@ -39,6 +60,21 @@ class RequestTools:
         expected_value_code, expected_value_text = results
         assert actually_value.status_code == expected_value_code, f'\nОжидаемое значение:\n"{expected_value_code}"\nФактическое значение:\n"{actually_value.status_code}"'
         assert expected_value_text in actually_value.text, f'\nОжидаемое значение содержит:\n"{expected_value_text}"\nФактическое значение:\n"{actually_value.text}"'
+
+    @staticmethod
+    @allure.step("Удаляем пользователя после теста")
+    def delete_user_after_test(user):
+        response = RequestTools.try_user_authorization(user)
+        if response.status_code == 200:
+            token = response.json()[const['USER_ACCESS_TOKEN_PARAMETER_NAME']]
+            RequestTools.try_to_delete_user({const['USER_AUTHORIZATION_PARAMETER_NAME']: token})
+            allure.attach(  body=f"Удален пользователь с именем {user[const['USER_NAME_PARAMETER_NAME']]} (email: {user[const['USER_EMAIL_PARAMETER_NAME']]})".encode(),
+                            name="Успешное удаление созданного курьера",
+                            attachment_type=allure.attachment_type.TEXT, extension=".txt")
+        else:
+            allure.attach(  body=f"Авторизоваться под пользователем {user[const['USER_NAME_PARAMETER_NAME']]} не удалось".encode(),
+                            name="Ошибка удаления пользователя",
+                            attachment_type=allure.attachment_type.TEXT, extension=".txt")
 
 class Generators:
 

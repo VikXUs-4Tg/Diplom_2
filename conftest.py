@@ -1,7 +1,8 @@
 import pytest
 
 from data import const
-from helpers import Generators
+from helpers import Generators, RequestTools
+
 
 @pytest.fixture(scope='function')
 def random_user():
@@ -11,3 +12,4 @@ def random_user():
         const['USER_NAME_PARAMETER_NAME']: Generators.generate_random_name()
     }
     yield random_user
+    RequestTools.delete_user_after_test(random_user)

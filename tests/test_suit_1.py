@@ -11,7 +11,7 @@ class TestSuit1:
     @allure.story("Тестовый сценарий № 1")
     @allure.link(WEBPAGE, name='Учебный сервис «Stellar Burgers» (стенд)')
     def test_allowed_registration_new_user_with_valid_values(self, random_user):
-        print(random_user)
         response = RequestTools.try_to_register_new_user(user=random_user)
-        print(response.text)
         RequestTools.check_response_have_content(actually_value=response,results=results['ALLOWED_REGISTRATION_NEW_USER_WITH_VALID_VALUES'])
+
+
