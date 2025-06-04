@@ -72,7 +72,7 @@ class RequestTools:
                             name="Успешное удаление созданного курьера",
                             attachment_type=allure.attachment_type.TEXT, extension=".txt")
         else:
-            allure.attach(  body=f"Авторизоваться под пользователем {user[const['USER_NAME_PARAMETER_NAME']]} не удалось".encode(),
+            allure.attach(  body=f"Авторизоваться под пользователем не удалось".encode(),
                             name="Ошибка удаления пользователя",
                             attachment_type=allure.attachment_type.TEXT, extension=".txt")
 
