@@ -43,6 +43,3 @@ class TestSuit1:
         random_user[parameter] = ""
         response = RequestTools.try_to_register_new_user(user=random_user)
         RequestTools.check_response(actually_value=response,results=results['NOT_ALLOWED_REGISTRATION_USER_WITH_OUT_OR_EMPTY_ANY_NEED_PARAMETERS'])
-
-
-

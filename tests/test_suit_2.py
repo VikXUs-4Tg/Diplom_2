@@ -39,5 +39,3 @@ class TestSuit2:
         del another_user[parameter]
         response = RequestTools.try_user_authorization(user=another_user)
         RequestTools.check_response(actually_value=response,results=results['NOT_ALLOWED_AUTHORIZATION_USER_WITH_WRONG_VALUES'])
-
-

@@ -15,6 +15,7 @@ const = {
 'USER_REFRESH_TOKEN_PARAMETER_NAME' : 'refreshToken',
 'USER_AUTHORIZATION_PARAMETER_NAME' : 'authorization',
 'USER_TOKEN_PARAMETER_NAME' : 'token',
+'ORDER_INGREDIENTS_PARAMETER_NAME' : 'ingredients',
 }
 
 results = {
@@ -25,6 +26,10 @@ results = {
 'NOT_ALLOWED_AUTHORIZATION_USER_WITH_WRONG_VALUES' : (401,'{"success":false,"message":"email or password are incorrect"}'),
 'ALLOWED_CHANGE_DATA_OF_AUTHORIZED_USER' : (200,'"success":true'),
 'NOT_ALLOWED_CHANGE_DATA_OF_NOT_AUTHORIZED_USER' : (401 ,'{"success":false,"message":"You should be authorised"}'),
+'ALLOWED_MAKE_ORDER_WITH_OUT_AUTHORIZATION' : (200,'"success":true'),
+'ALLOWED_MAKE_ORDER_BY_AUTHORIZED_USER' : (200,'"success":true'),
+'NOT_ALLOWED_MAKE_ORDER_WITH_OUT_OR_EMPTY_LIST_OF_INGREDIENTS' : (400,'{"success":false,"message":"Ingredient ids must be provided"}'),
+'NOT_ALLOWED_MAKE_ORDER_WITH_BAD_INGREDIENT_HASH' : (500,'<!DOCTYPE html>'),
 }
 
 user_registration_need_parameters =     [
@@ -40,4 +45,3 @@ user_change_data_test_parameters =      [
 const['USER_EMAIL_PARAMETER_NAME']      ,
 const['USER_PASSWORD_PARAMETER_NAME']   ,
 const['USER_NAME_PARAMETER_NAME']       ]
-

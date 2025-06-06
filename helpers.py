@@ -91,8 +91,8 @@ class RequestTools:
 
     @staticmethod
     @allure.step("Пытаемся создать заказ")
-    def try_to_make_order(ingredients):
-        response = RequestTools.send_request(handler=const['HANDLER_MAKE_ORDER'], data=ingredients)
+    def try_to_make_order(user_access_token, list_of_ingredients):
+        response = RequestTools.send_request(handler=const['HANDLER_MAKE_ORDER'], headers=user_access_token, data=list_of_ingredients)
         allure.attach(  body=f"Код ответа: {response.status_code}\nТело ответа:\n{response.text}".encode(),
                         name="Ответ на попытку создать заказ",
                         attachment_type=allure.attachment_type.TEXT, extension=".txt")
@@ -155,8 +155,7 @@ class Generators:
         return modified_string
 
     @staticmethod
-    def generate_random_burger(number_of_main=None, number_of_sauce=None):
-        print()
+    def generate_random_burger():
         response = RequestTools.try_to_get_ingredients().json()["data"]
         list_of_bun = []
         list_of_main = []
@@ -166,16 +165,10 @@ class Generators:
                 case "bun": list_of_bun.append(element["_id"])
                 case "main": list_of_main.append(element["_id"])
                 case "sauce": list_of_sauce.append(element["_id"])
-        random_bun = random.choice(list_of_bun)
-
-        if number_of_main: random_main = random.sample(population=list_of_main, k=number_of_main)
-        else: random_main = None
-
-        if number_of_sauce: random_sauce = random.sample(population=list_of_sauce, k=number_of_sauce)
-        else: random_sauce = None
-
-        print(f"Случайный bun: {random_bun}")
-        print(f"Случайные main: {random_main}")
-        print(f"Случайные sauce: {random_sauce}")
-
-        return random_bun, random_main, random_sauce
+        number_of_bun = random.randint(a=1, b=len(list_of_bun))
+        random_bun = random.sample(population=list_of_bun, k=number_of_bun)
+        number_of_main = random.randint(a=0, b=len(list_of_main))
+        random_main = random.sample(population=list_of_main, k=number_of_main)
+        number_of_sauce = random.randint(a=0, b=len(list_of_sauce))
+        random_sauce = random.sample(population=list_of_sauce, k=number_of_sauce)
+        return { const['ORDER_INGREDIENTS_PARAMETER_NAME'] : random_bun + random_main + random_sauce }
