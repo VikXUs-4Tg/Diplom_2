@@ -2,7 +2,7 @@ import allure
 import pytest
 
 from data import WEBPAGE, results, user_authorization_test_parameters
-from helpers import RequestTools, Generators, make_clone
+from helpers import RequestTools, Generators, Tools
 
 
 class TestSuit2:
@@ -23,7 +23,7 @@ class TestSuit2:
     @allure.link(WEBPAGE, name='Учебный сервис «Stellar Burgers» (стенд)')
     def test_not_allowed_authorization_user_with_wrong_values(self, random_user, parameter):
         RequestTools.try_to_register_new_user(user=random_user)
-        another_user = make_clone(random_user)
+        another_user = Tools.make_clone(random_user)
         another_user[parameter] = Generators.change_last_two_chars(another_user[parameter])
         response = RequestTools.try_user_authorization(user=another_user)
         RequestTools.check_response(actually_value=response,results=results['NOT_ALLOWED_AUTHORIZATION_USER_WITH_WRONG_VALUES'])
@@ -35,7 +35,7 @@ class TestSuit2:
     @allure.link(WEBPAGE, name='Учебный сервис «Stellar Burgers» (стенд)')
     def test_not_allowed_authorization_user_with_empty_values(self, random_user, parameter):
         RequestTools.try_to_register_new_user(user=random_user)
-        another_user = make_clone(random_user)
+        another_user = Tools.make_clone(random_user)
         del another_user[parameter]
         response = RequestTools.try_user_authorization(user=another_user)
         RequestTools.check_response(actually_value=response,results=results['NOT_ALLOWED_AUTHORIZATION_USER_WITH_WRONG_VALUES'])

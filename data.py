@@ -5,12 +5,16 @@ const = {
 'HANDLER_AUTHORIZATION_USER' : ('post', WEBPAGE + '/api/auth/login/'),
 'HANDLER_DELETE_USER' : ('delete', WEBPAGE + '/api/auth/user/'),
 'HANDLER_CHANGE_DATA_OF_USER' : ('patch', WEBPAGE + '/api/auth/user/'),
+'HANDLER_LOGOUT_USER' : ('post', WEBPAGE + '/api/auth/logout/'),
+'HANDLER_GET_INGREDIENTS' : ('get', WEBPAGE + '/api/ingredients/'),
+'HANDLER_MAKE_ORDER' : ('post', WEBPAGE + '/api/orders/'),
 'USER_EMAIL_PARAMETER_NAME' : 'email',
 'USER_PASSWORD_PARAMETER_NAME' : 'password',
 'USER_NAME_PARAMETER_NAME' : 'name',
 'USER_ACCESS_TOKEN_PARAMETER_NAME' : 'accessToken',
+'USER_REFRESH_TOKEN_PARAMETER_NAME' : 'refreshToken',
 'USER_AUTHORIZATION_PARAMETER_NAME' : 'authorization',
-
+'USER_TOKEN_PARAMETER_NAME' : 'token',
 }
 
 results = {
@@ -20,6 +24,7 @@ results = {
 'ALLOWED_AUTHORIZATION_USER_WITH_VALID_VALUES' : (200,'"success":true'),
 'NOT_ALLOWED_AUTHORIZATION_USER_WITH_WRONG_VALUES' : (401,'{"success":false,"message":"email or password are incorrect"}'),
 'ALLOWED_CHANGE_DATA_OF_AUTHORIZED_USER' : (200,'"success":true'),
+'NOT_ALLOWED_CHANGE_DATA_OF_NOT_AUTHORIZED_USER' : (401 ,'{"success":false,"message":"You should be authorised"}'),
 }
 
 user_registration_need_parameters =     [
