@@ -1,0 +1,3 @@
+Код ответа: 200
+Тело ответа:
+{"success":true,"orders":[{"_id":"6842dd699ed280001b60e2a8","ingredients":["61c0c5a71d1f82001bdaaa6d"],"status":"done","name":"Флюоресцентный бургер","createdAt":"2025-06-06T12:22:01.380Z","updatedAt":"2025-06-06T12:22:03.023Z","number":237746}],"total":237746,"totalToday":909}

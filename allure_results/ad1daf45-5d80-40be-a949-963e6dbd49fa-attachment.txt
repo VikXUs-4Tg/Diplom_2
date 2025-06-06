@@ -1,0 +1,3 @@
+Код ответа: 200
+Тело ответа:
+{"success":true,"accessToken":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDJkZDRjOWVkMjgwMDAxYjYwZTI3YiIsImlhdCI6MTc0OTIxMjQ5MywiZXhwIjoxNzQ5MjEzNjkzfQ.VvVYCxlFtlTkpBtqqkuxplx_vxeSde4WyekQhJsoc80","refreshToken":"343097e87ba8d861e6c64918e74b7afb13c94ccb0048d8edc6e20a75fd41bdb6451b8a9c8ca346f7","user":{"email":"f7iq@hsdqj.xi","name":"jcrzb"}}
