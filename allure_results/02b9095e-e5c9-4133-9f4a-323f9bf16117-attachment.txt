@@ -1,0 +1,3 @@
+Код ответа: 202
+Тело ответа:
+{"success":true,"message":"User successfully removed"}

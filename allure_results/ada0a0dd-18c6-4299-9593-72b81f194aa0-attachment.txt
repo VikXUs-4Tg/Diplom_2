@@ -1,0 +1,3 @@
+Код ответа: 403
+Тело ответа:
+{"success":false,"message":"Email, password and name are required fields"}

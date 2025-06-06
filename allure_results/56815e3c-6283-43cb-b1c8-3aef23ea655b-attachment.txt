@@ -1,0 +1,3 @@
+Код ответа: 200
+Тело ответа:
+{"success":true,"user":{"email":"7a7lauid49@lyzxmi.fx","name":"8ihpak9u"}}

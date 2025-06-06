@@ -1,0 +1,3 @@
+Код ответа: 200
+Тело ответа:
+{"success":true,"name":"Флюоресцентный бургер","order":{"ingredients":[{"_id":"61c0c5a71d1f82001bdaaa6d","name":"Флюоресцентная булка R2-D3","type":"bun","proteins":44,"fat":26,"carbohydrates":85,"calories":643,"price":988,"image":"https://code.s3.yandex.net/react/code/bun-01.png","image_mobile":"https://code.s3.yandex.net/react/code/bun-01-mobile.png","image_large":"https://code.s3.yandex.net/react/code/bun-01-large.png","__v":0}],"_id":"6842dd699ed280001b60e2a8","owner":{"name":"cyxbp","email":"sai@zsuhaxa.ff","createdAt":"2025-06-06T12:22:00.765Z","updatedAt":"2025-06-06T12:22:00.765Z"},"status":"done","name":"Флюоресцентный бургер","createdAt":"2025-06-06T12:22:01.380Z","updatedAt":"2025-06-06T12:22:03.023Z","number":237746,"price":988}}
