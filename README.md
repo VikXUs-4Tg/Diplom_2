@@ -44,7 +44,7 @@ GET api/orders - получение заказов конкретного пол
 
 ### Ссылки:
 
-#### Ссылка на Pull-request:
+#### Ссылка на Pull-request: https://github.com/VikXUs-4Tg/Diplom_2/pull/1
 
 #### Тестовый стенд: https://stellarburgers.nomoreparties.site/
 
