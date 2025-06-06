@@ -8,6 +8,7 @@ const = {
 'HANDLER_LOGOUT_USER' : ('post', WEBPAGE + '/api/auth/logout/'),
 'HANDLER_GET_INGREDIENTS' : ('get', WEBPAGE + '/api/ingredients/'),
 'HANDLER_MAKE_ORDER' : ('post', WEBPAGE + '/api/orders/'),
+'HANDLER_GATE_ORDER_OF_USER' : ('get', WEBPAGE + '/api/orders/'),
 'USER_EMAIL_PARAMETER_NAME' : 'email',
 'USER_PASSWORD_PARAMETER_NAME' : 'password',
 'USER_NAME_PARAMETER_NAME' : 'name',
@@ -30,6 +31,8 @@ results = {
 'ALLOWED_MAKE_ORDER_BY_AUTHORIZED_USER' : (200,'"success":true'),
 'NOT_ALLOWED_MAKE_ORDER_WITH_OUT_OR_EMPTY_LIST_OF_INGREDIENTS' : (400,'{"success":false,"message":"Ingredient ids must be provided"}'),
 'NOT_ALLOWED_MAKE_ORDER_WITH_BAD_INGREDIENT_HASH' : (500,'<!DOCTYPE html>'),
+'ALLOWED_TO_GET_LIST_OF_ORDERS_BY_AUTHORIZED_USER' : (200,'"success":true'),
+'NOT_ALLOWED_TO_GET_LIST_OF_ORDERS_WITH_OUT_AUTHORIZATION' : (401,'{"success":false,"message":"You should be authorised"}'),
 }
 
 user_registration_need_parameters =     [

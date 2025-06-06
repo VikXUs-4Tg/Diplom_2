@@ -99,6 +99,15 @@ class RequestTools:
         return response
 
     @staticmethod
+    @allure.step("Пытаемся получить заказы пользователя")
+    def try_to_get_orders_list(user_access_token):
+        response = RequestTools.send_request(handler=const['HANDLER_GATE_ORDER_OF_USER'], headers=user_access_token)
+        allure.attach(  body=f"Код ответа: {response.status_code}\nТело ответа:\n{response.text}".encode(),
+                        name="Ответ на попытку получить заказы пользователя",
+                        attachment_type=allure.attachment_type.TEXT, extension=".txt")
+        return response
+
+    @staticmethod
     @allure.step("Проверяем ответ на соответствие ожидаемому значению: {results}")
     def check_response(actually_value, results):
         expected_value_code, expected_value_text = results
